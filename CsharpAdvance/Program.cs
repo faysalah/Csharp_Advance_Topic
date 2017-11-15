@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace CsharpAdvance
 {
-    // a Delegate is an object that knows how to call a method.
-    delegate int Transformer(int x);
+    delegate void ProgressReporter(int percentComplete);
     class Util
     {
-        public static void Transform(int[] values, Transformer t)
+        public static void HardWork(ProgressReporter p)
         {
-            for (int i = 0; i < values.Length; i++)
+            for (int i = 0; i <=10; i++)
             {
-                values[i] = t.Invoke(values[i]);
+                p.Invoke(i * 10);
+                System.Threading.Thread.Sleep(100);
             }
         }
     }
@@ -22,20 +22,19 @@ namespace CsharpAdvance
     {
         static void Main(string[] args)
         {
-            int[] values = { 1, 2, 3, 4 };
-
-            Util.Transform(values, qube);
-
-            foreach (int i in values)
-            {
-                Console.Write(i+" ");
-            }
-            Console.Read();
- 
+            ProgressReporter p = WriteProgressToConsole;
+            p += WriteProgressToFile;
+            Util.HardWork(p);
         }
 
-        static int square (int x) { return x * x; }
+        static void WriteProgressToConsole(int percentComplete)
+        {
+            Console.WriteLine(percentComplete);
+        }
 
-        static int qube(int x){ return x * x * x; }
+        static void WriteProgressToFile(int percentComplete)
+        {
+            System.IO.File.WriteAllText("progress.txt", percentComplete.ToString());
+        }
     }
 }
