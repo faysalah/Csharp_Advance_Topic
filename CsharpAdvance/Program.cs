@@ -6,34 +6,26 @@ using System.Threading.Tasks;
 
 namespace CsharpAdvance
 {
-    delegate int up();
-    class Util
-    {
-        public int count = 0;
+    public delegate T Transformer<T>(T arg);
 
-        public int upOne()
-        {
-            count++;
-            return count;
-        }
-
-        public int upTwo()
-        {
-            count = count + 2;
-            return count;
-        }
-    }
+    //class Util
+    //{
+    //    public static void Transform<T>(T[] values, Transformer<T> t)
+    //    {
+    //        for (int i = 0; i < values.Length; i++)
+    //        {
+    //            values[i] = t.Invoke(values[i],values[i]);
+    //        }
+    //    }
+    //}
     class Program
     {
         static void Main(string[] args)
         {
-            Util util = new Util();
-            up p = util.upTwo;
-            p += util.upOne;
-            Console.WriteLine(p.Target == util);
-            Console.WriteLine(p.Method);
-            Console.WriteLine(p.Invoke());
+            Transformer t = Square;
+
             Console.Read();
         }
+        static double Square(double x) { return x * x; }
     }
 }
