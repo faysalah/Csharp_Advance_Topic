@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace CsharpAdvance
 {
+    // a Delegate is an object that knows how to call a method.
     delegate int Transformer(int x);
     class Util
     {
@@ -21,18 +22,20 @@ namespace CsharpAdvance
     {
         static void Main(string[] args)
         {
-            // a Delegate is an object that knows how to call a method.
-            int[] values = { 1, 2, 3 };
-            Util.Transform(values, square);
+            int[] values = { 1, 2, 3, 4 };
+
+            Util.Transform(values, qube);
+
             foreach (int i in values)
             {
-                Console.WriteLine(i+" ");
+                Console.Write(i+" ");
             }
             Console.Read();
+ 
         }
-        static int square (int x)
-        {
-            return x * x;
-        }
+
+        static int square (int x) { return x * x; }
+
+        static int qube(int x){ return x * x * x; }
     }
 }
