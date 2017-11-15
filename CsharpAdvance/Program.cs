@@ -6,35 +6,34 @@ using System.Threading.Tasks;
 
 namespace CsharpAdvance
 {
-    delegate void ProgressReporter(int percentComplete);
+    delegate int up();
     class Util
     {
-        public static void HardWork(ProgressReporter p)
+        public int count = 0;
+
+        public int upOne()
         {
-            for (int i = 0; i <=10; i++)
-            {
-                p.Invoke(i * 10);
-                System.Threading.Thread.Sleep(100);
-            }
+            count++;
+            return count;
+        }
+
+        public int upTwo()
+        {
+            count = count + 2;
+            return count;
         }
     }
     class Program
     {
         static void Main(string[] args)
         {
-            ProgressReporter p = WriteProgressToConsole;
-            p += WriteProgressToFile;
-            Util.HardWork(p);
-        }
-
-        static void WriteProgressToConsole(int percentComplete)
-        {
-            Console.WriteLine(percentComplete);
-        }
-
-        static void WriteProgressToFile(int percentComplete)
-        {
-            System.IO.File.WriteAllText("progress.txt", percentComplete.ToString());
+            Util util = new Util();
+            up p = util.upTwo;
+            p += util.upOne;
+            Console.WriteLine(p.Target == util);
+            Console.WriteLine(p.Method);
+            Console.WriteLine(p.Invoke());
+            Console.Read();
         }
     }
 }
