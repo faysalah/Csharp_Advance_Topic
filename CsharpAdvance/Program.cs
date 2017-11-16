@@ -6,40 +6,17 @@ using System.Threading.Tasks;
 
 namespace CsharpAdvance
 {
-    public interface ITransformer
-    {
-        int Transform(int x);
-    }
-
-    class Util
-    {
-        public static void TransformAll(int[] values, ITransformer t)
-        {
-            for (int i = 0; i < values.Length; i++)
-            {
-                values[i] = t.Transform(values[i]);
-            }
-        }
-    }
-    class Square: ITransformer
-    {
-        public int Transform (int x)
-        {
-            return x * x;
-        }
-    }
     class Program
     {
         static void Main(string[] args)
         {
-            int[] values = { 1, 2, 3 };
-        
-            Util.TransformAll(values,new Square());
-
-            foreach (int item in values)
-            {
-                Console.WriteLine(item);
-            }
+            var video = new Video() { Title = " VEDIO_1" };
+            var videoEncoder = new VideoEncoder();//broadcaster or publisher
+            var mailService = new MailService();// Subscriber
+            var textMessageService = new TextMessageService();// Subscriber
+            videoEncoder.VideoEncoded += mailService.OnVideoEncoded;
+            videoEncoder.VideoEncoded += textMessageService.OnVideoEncoded;
+            videoEncoder.Encode(video);
             Console.Read();
         }
     }
