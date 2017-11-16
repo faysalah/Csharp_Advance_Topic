@@ -8,9 +8,9 @@ namespace CsharpAdvance
 {
     class TextMessageService
     {
-        public void OnVideoEncoded(object source, VideoEventArgs args)
+        public void OnVideoEncoded(object source, EventArgs args)
         {
-            Console.WriteLine("TextMessageService: Sending text message ..."+ args.Video.Title);
+            Console.WriteLine("TextMessageService: Sending text message ...");
         }
     }
 }

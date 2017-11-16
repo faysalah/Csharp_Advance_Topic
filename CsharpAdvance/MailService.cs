@@ -8,9 +8,9 @@ namespace CsharpAdvance
 {
     public class MailService
     {
-        public void OnVideoEncoded(object source, VideoEventArgs args)
+        public void OnVideoEncoded(object source, EventArgs args)
         {
-            Console.WriteLine("MailService: Sending email ..."+ args.Video.Title);
+            Console.WriteLine("MailService: Sending email ...");
         }
     }
 }
