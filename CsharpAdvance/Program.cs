@@ -8,17 +8,17 @@ namespace CsharpAdvance
 {
     class A
     {
-        public void Display() { Console.WriteLine("A::Display()"); }
+        public virtual void Display() { Console.WriteLine("A::Display()"); }
     }
 
     class B : A
     {
-        public new void Display() { Console.WriteLine("B::Display()"); }
+        public override void Display() { Console.WriteLine("B::Display()"); }
     }
 
     class C : B
     {
-        public new void Display() { Console.WriteLine("C::Display()"); }
+        public override void Display() { Console.WriteLine("C::Display()"); }
     }
     class Program
     {
@@ -39,6 +39,7 @@ namespace CsharpAdvance
             b.Display(); 
 
             Console.ReadKey();
+            // we and use new and virtual keyword togather
         }
     }
 }
